@@ -30,11 +30,7 @@
                 <i class="fas fa-search"></i>
                 <input type="text" id="searchInput" placeholder="ابحث عن مشروبك..." onkeyup="searchItems()">
             </div>
-            <div class="categories">
-                <button class="cat-btn active" onclick="filterCat('الكل')">الكل</button>
-                <button class="cat-btn" onclick="filterCat('ساخن')">ساخن</button>
-                <button class="cat-btn" onclick="filterCat('بارد')">بارد</button>
-            </div>
+            <div id="categoriesContainer" class="categories"></div>
         </div>
 
         <div id="menuGrid" class="menu-grid"></div>
@@ -82,16 +78,25 @@
             <button class="exit-btn" onclick="closePanel('settingsPanel')">×</button>
         </div>
         <div class="panel-body">
-            <div class="add-item-form">
-                <h4>إضافة صنف جديد</h4>
+            <div class="admin-section">
+                <h4>🗂️ إدارة الأقسام</h4>
+                <div class="input-group">
+                    <input type="text" id="newCatName" placeholder="اسم القسم الجديد (مثلاً: حلويات)">
+                    <button onclick="addCategory()" class="add-btn">إضافة قسم +</button>
+                </div>
+                <div id="adminCatList" class="manager-list"></div>
+            </div>
+
+            <hr>
+
+            <div class="admin-section">
+                <h4>🍔 إضافة صنف جديد</h4>
                 <input type="text" id="newName" placeholder="اسم الصنف">
                 <input type="number" id="newPrice" placeholder="السعر">
-                <select id="newCat">
-                    <option value="ساخن">ساخن</option>
-                    <option value="بارد">بارد</option>
-                </select>
-                <button onclick="addItem()">إضافة صنف +</button>
+                <select id="newCatSelect"></select>
+                <button onclick="addItem()" class="add-btn">إضافة صنف +</button>
             </div>
+
             <div id="managerList" class="manager-list"></div>
         </div>
     </div>
@@ -99,8 +104,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
