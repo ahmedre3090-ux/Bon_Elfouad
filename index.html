@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بن الفؤاد | النظام المتكامل</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <audio id="notificationSound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" preload="auto"></audio>
+
+    <nav id="adminNav" class="admin-nav hidden">
+        <button onclick="openPanel('ordersPanel')"><i class="fas fa-receipt"></i> الطلبات <span id="badge" class="badge">0</span></button>
+        <button onclick="openPanel('settingsPanel')"><i class="fas fa-cog"></i> الإعدادات</button>
+        <button onclick="logout()" class="logout-btn">خروج</button>
+    </nav>
+
+    <div class="container">
+        <header class="main-header">
+            <div class="admin-login-btn" onclick="openModal('loginModal')"><i class="fas fa-user-shield"></i></div>
+            <img src="image.png" alt="بن الفؤاد" class="main-logo">
+            <h1 id="cafeName">بن الفؤاد</h1>
+        </header>
+
+        <div class="search-section">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="ابحث عن مشروبك..." onkeyup="searchItems()">
+            </div>
+            <div class="categories">
+                <button class="cat-btn active" onclick="filterCat('الكل')">الكل</button>
+                <button class="cat-btn" onclick="filterCat('ساخن')">ساخن</button>
+                <button class="cat-btn" onclick="filterCat('بارد')">بارد</button>
+            </div>
+        </div>
+
+        <div id="menuGrid" class="menu-grid"></div>
+    </div>
+
+    <div id="cartBar" class="cart-bar hidden">
+        <div class="cart-text">
+            <span id="cartQty">0 صنف</span>
+            <strong id="cartTotal">0 ج.م</strong>
+        </div>
+        <button class="order-btn" onclick="openModal('tableModal')">طلب الآن ☕</button>
+    </div>
+
+    <div id="tableModal" class="modal">
+        <div class="modal-box">
+            <h3>أكد طلبك</h3>
+            <p>من فضلك أدخل رقم الطاولة:</p>
+            <input type="number" id="tableInput" placeholder="رقم الطاولة">
+            <button class="confirm-btn" onclick="submitOrder()">إرسال للمطبخ</button>
+            <button class="close-btn" onclick="closeModal('tableModal')">رجوع</button>
+        </div>
+    </div>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-box">
+            <h3>دخول الإدارة</h3>
+            <input type="text" id="userInput" placeholder="اسم المستخدم">
+            <input type="password" id="passInput" placeholder="كلمة المرور">
+            <button class="confirm-btn" onclick="login()">دخول</button>
+            <button class="close-btn" onclick="closeModal('loginModal')">إغلاق</button>
+        </div>
+    </div>
+
+    <div id="ordersPanel" class="full-screen-panel hidden">
+        <div class="panel-header">
+            <h2>📦 الطلبات الواردة</h2>
+            <button class="exit-btn" onclick="closePanel('ordersPanel')">×</button>
+        </div>
+        <div id="ordersContent" class="panel-body"></div>
+    </div>
+
+    <div id="settingsPanel" class="full-screen-panel hidden">
+        <div class="panel-header">
+            <h2>⚙️ إعدادات المنيو</h2>
+            <button class="exit-btn" onclick="closePanel('settingsPanel')">×</button>
+        </div>
+        <div class="panel-body">
+            <div class="add-item-form">
+                <h4>إضافة صنف جديد</h4>
+                <input type="text" id="newName" placeholder="اسم الصنف">
+                <input type="number" id="newPrice" placeholder="السعر">
+                <select id="newCat">
+                    <option value="ساخن">ساخن</option>
+                    <option value="بارد">بارد</option>
+                </select>
+                <button onclick="addItem()">إضافة صنف +</button>
+            </div>
+            <div id="managerList" class="manager-list"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
